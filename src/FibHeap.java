@@ -46,6 +46,11 @@ public class FibonacciHeap<T extends Comparable<T>> {
         size++;
     }
 
+    // This should have 4 steps to do.
+    // Remove the minimum node from the root list.
+    // Add the children of the minimum node to the root list.
+    // Consolidate the trees in the heap, so that no two trees have the same degree.
+    // Set min to the node with the smallest key in the root list.
     public T removeMin() {
         // This method should remove and return the minimum key
         // I am implementing cascading cuts, consolidations
@@ -54,7 +59,7 @@ public class FibonacciHeap<T extends Comparable<T>> {
         return null;
     }
 
-        // when the new key of a node is less than its parent's key.
+    // when the new key of a node is less than its parent's key.
     // The node is cut from its parent and added to the root list
     private void cut(FibonacciNode<T> x, FibonacciNode<T> y) {
         // remove x from the child list of y
