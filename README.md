@@ -4,7 +4,7 @@ This is the greater repo for the Fibonacci heap project. As we work on individua
 Make sure to merge with main and check out a new branch when creating a new feature. 
 
 Timeline
-Week 1: investigation and early implementation of a basic structure <- Current Week  
-Week 2: Full implementation of a priority queue using a Fibonacci heap and work on additional functions.  
+Week 1: investigation and early implementation of a basic structure 
+Week 2: Full implementation of a priority queue using a Fibonacci heap and work on additional functions.  <- Current Week  
 Week 3: Flesh out and complete implementation of all functions and testing  
 Week 4: Final testing and presentation.  
