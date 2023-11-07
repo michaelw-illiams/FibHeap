@@ -5,6 +5,6 @@ Make sure to merge with main and check out a new branch when creating a new feat
 
 Timeline
 Week 1: investigation and early implementation of a basic structure 
-Week 2: Full implementation of a priority queue using a Fibonacci heap and work on additional functions.  <- Current Week  
-Week 3: Flesh out and complete implementation of all functions and testing  
+Week 2: Full implementation of a priority queue using a Fibonacci heap and work on additional functions. 
+Week 3: Flesh out and complete implementation of all functions and testing   <- Current Week  
 Week 4: Final testing and presentation.  
