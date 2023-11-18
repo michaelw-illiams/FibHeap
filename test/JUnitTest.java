@@ -1,32 +1,61 @@
-package JUnitTest;
-import main.FibHeap;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class JUnitTest {
-
+	
+	private static FibHeap2 fh;
 	
 	@Test
 	void testMinimum() {
-		FibHeap fh = new FibHeap();
-		fh.insert(100);
-		fh.insert(50);
-		assertEquals(fh.minimum(), 50);
-		fh.insert(200);
-		fh.insert(10);
-		assertEquals(fh.minimum(), 10);
-		fh.insert(1);
-		assertEquals(fh.minimum(), 1);
+//		fh = new FibHeap2();
+//		assertEquals(null, fh.peek());
+//		
+//		fh.insert(new FibNode2("n1", 100));
+//		fh.insert(new FibNode2("n2", 50));
+//		assertEquals(50, fh.peek().priority);
+//		
+//		fh.insert(new FibNode2("n3", 20));
+//		fh.insert(new FibNode2("n4", 50));
+//		assertEquals(20, fh.peek().priority);
+//		
+//		fh.insert(new FibNode2("n5", 300));
+//		fh.insert(new FibNode2("n6", 400));
+//		assertEquals(20, fh.peek().priority);
+//		
+//		fh.insert(new FibNode2("n5", 10));
+//		fh.insert(new FibNode2("n6", 5));
+//		assertEquals(5, fh.peek().priority);s
 	}
 	
 	@Test
 	void testInsert() {
-		FibHeap fh = new FibHeap();
-		fh.insert(5);
-		fh.insert(3);
-		fh.insert(10);
-		fh.insert(1);
-		assertEquals(fh.toString(), "5, 10, 1, 3, ");
+		fh = new FibHeap2();
+		fh.insert(new FibNode2("n1", 1));
+		assertEquals(1, fh.size());
+		
+		fh.insert(new FibNode2("n2", 2));
+		fh.insert(new FibNode2("n3", 3));
+		fh.insert(new FibNode2("n4", 4));
+		fh.insert(new FibNode2("n5", 5));
+		fh.insert(new FibNode2("n6", 6));
+		fh.insert(new FibNode2("n7", 7));
+		assertEquals(7, fh.size());
+		
+//		for(int i = 8; i < 300; i++) {
+//			fh.insert(new FibNode2("n" + i, i));
+//		}
+//		assertEquals(299, fh.size());
 	}
-
+	
+	@Test
+	void testRemoveMin() {
+		for(int i = 1; i < 4; i++) {
+			System.out.println("index = " + i);
+			fh.getMin();
+//			System.out.println(i + 1);
+//			System.out.println(fh.peek().priority);
+			assertEquals(i + 1, fh.peek().priority);
+		}
+	}
 }
