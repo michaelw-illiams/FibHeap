@@ -62,14 +62,14 @@ public class FibHeap2 {
         if (isEmpty()) {
             return null;
         }
-        FibNode2 first = minNode, child = minNode.child;
+        FibNode2 first = minNode, child = minNode.child, anchor = minNode.child;
         if (child != null && minNode != null) {
-        	FibNode2 minChild = minNode.child;
-            while (child != minChild) {
-            	addToRootList(child);
-            	child.parent = null;
-                child = child.next;
-            }
+            do {
+            	FibNode2 nextChild = child.next;
+                addToRootList(child);
+                child.parent = null;
+                child = nextChild;
+            } while (child != anchor);
         }
         removeMin();
         return first;
@@ -159,8 +159,8 @@ public class FibHeap2 {
             }
     
             degreeTable[degree] = current;
+            
         }
-        
         // recheck for min node
         minNode = null;
         for (FibNode2 node : degreeTable) {

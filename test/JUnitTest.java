@@ -25,7 +25,7 @@ class JUnitTest {
 //		
 //		fh.insert(new FibNode2("n5", 10));
 //		fh.insert(new FibNode2("n6", 5));
-//		assertEquals(5, fh.peek().priority);s
+//		assertEquals(5, fh.peek().priority);
 	}
 	
 	@Test
@@ -41,20 +41,14 @@ class JUnitTest {
 		fh.insert(new FibNode2("n6", 6));
 		fh.insert(new FibNode2("n7", 7));
 		assertEquals(7, fh.size());
-		
-//		for(int i = 8; i < 300; i++) {
-//			fh.insert(new FibNode2("n" + i, i));
-//		}
-//		assertEquals(299, fh.size());
 	}
 	
 	@Test
 	void testRemoveMin() {
-		for(int i = 1; i < 4; i++) {
+		for(int i = 1; i < 5; i++) {
 			System.out.println("index = " + i);
 			fh.getMin();
-//			System.out.println(i + 1);
-//			System.out.println(fh.peek().priority);
+			System.out.println(fh.toString());
 			assertEquals(i + 1, fh.peek().priority);
 		}
 	}
