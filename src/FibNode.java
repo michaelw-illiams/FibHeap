@@ -1,4 +1,4 @@
-public class FibNode2 {
+public class FibNode {
     int priority;
     String name;
     FibNode2 parent, child, left, right;
