@@ -1,6 +1,6 @@
 public class HospitalQueue {
 
-    private FibHeap2 fibHeap;
+    FibHeap2 fibHeap;
     private int numPatients = 0;
 
 

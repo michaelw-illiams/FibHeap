@@ -2,14 +2,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FibHeap2 {
-    
+
     // Pointer to the head and minimum node in the root list
     private FibNode2 rootList, minNode;
 
     // Maintain total node count in full Fibonacci heap
-    private int totalFibNode2s; 
+    private int totalFibNode2s;
 
-// Return min node in O(1) time
+    // Return min node in O(1) time
     public FibNode2 peek() {
         return minNode;
     }
@@ -71,7 +71,7 @@ public class FibHeap2 {
     // The root of the new root list becomes equal to the first list, and the second
     // list is simply appended to the end (then the proper min node is determined)
     public FibHeap2 merge(FibHeap2 h2) {
-    	FibHeap2 H = new FibHeap2();
+        FibHeap2 H = new FibHeap2();
         H.rootList = rootList;
         H.minNode = minNode;
         // Fix pointers when merging the two heaps
@@ -219,5 +219,41 @@ public class FibHeap2 {
         }
         node.left.right = node.right;
         node.right.left = node.left;
+    }
+    // toString method to print the heap's structure
+    @Override
+    public String toString() {
+        if (rootList == null) {
+            return "Heap is empty";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        FibNode2 current = rootList;
+        do {
+            sb.append(printTree(current, 0));
+            current = current.right;
+            if (current != rootList) {
+                sb.append("\n");
+            }
+        } while (current != rootList);
+
+        return sb.toString();
+    }
+
+    // Helper method to print the structure of the tree rooted at a given node
+    private String printTree(FibNode2 node, int level) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" - ".repeat(level))
+                .append(String.format("Node{name='%s', priority=%d, degree=%d}", node.name, node.priority, node.degree));
+
+        if (node.child != null) {
+            sb.append("\n").append(printTree(node.child, level + 1));
+            FibNode2 child = node.child.right;
+            while (child != node.child) {
+                sb.append("\n").append(printTree(child, level + 1));
+                child = child.right;
+            }
+        }
+        return sb.toString();
     }
 }
