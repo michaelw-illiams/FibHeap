@@ -10,7 +10,7 @@ public class FibNode {
      * @param name, name of FibNode2
      * @param priority, priority of FibNode2. 
      */
-    public FibNode2(String name, int priority) {
+    public FibNode(String name, int priority) {
         this.priority = priority;
         this.name = name;
         this.parent = null;

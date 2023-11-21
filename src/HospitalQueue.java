@@ -1,6 +1,6 @@
 public class HospitalQueue {
 
-    private FibHeap2 fibHeap;
+    private FibHeap fibHeap;
     private int numPatients = 0;
 
 
@@ -8,13 +8,13 @@ public class HospitalQueue {
      * Constructor
      */
     public HospitalQueue() {
-        fibHeap = new FibHeap2();
+        fibHeap = new FibHeap();
     }
 
     /**
      * Adds a new patient to the queue
      */
-    public FibNode2 addPatient(String name, int priority) {
+    public FibNode addPatient(String name, int priority) {
         numPatients++;
         return fibHeap.insert(name, priority);
     }
@@ -54,7 +54,7 @@ public class HospitalQueue {
     /**
      * Dequeues the first patient in the queue
      */
-    public FibNode2 dequeue() {
+    public FibNode dequeue() {
         if (!this.isEmpty()) {
             numPatients--;
             return fibHeap.dequeue();
@@ -66,7 +66,7 @@ public class HospitalQueue {
      * Merge two HosptialQueues
      */
     public void merge(HospitalQueue toMerge) {
-    	FibHeap2 fh = this.getFibHeap();
+    	FibHeap fh = this.getFibHeap();
     	this.fibHeap = fh.merge(toMerge.getFibHeap());
     	numPatients = numPatients + toMerge.numPatients;
     }
@@ -74,7 +74,7 @@ public class HospitalQueue {
     /**
      * Returns but does not remove the first patient in the queue
      */
-    public FibNode2 peek() {
+    public FibNode peek() {
     	if(fibHeap.peek() != null) {
     		return fibHeap.peek();
     	}
@@ -93,7 +93,7 @@ public class HospitalQueue {
      */
     public void emptyQueue() {
         numPatients = 0;
-        fibHeap = new FibHeap2();
+        fibHeap = new FibHeap();
     }
 
     /**
@@ -103,7 +103,7 @@ public class HospitalQueue {
         return numPatients;
     }
     
-    public FibHeap2 getFibHeap() {
+    public FibHeap getFibHeap() {
     	return this.fibHeap;
     }
     

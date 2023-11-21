@@ -2,41 +2,41 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * File: FibHeap2.java
+ * File: FibHeap.java
  * @author Michael Williams, Carson Nannini
  * Purpose: The purpose of this file is to use a circular linked list in 
  * order to produce a standard Fibonacci Heap implementation. 
  */
 public class FibHeap {
     
-    private FibNode2 rootList, minNode;
-    private int totalFibNode2s; 
+    private FibNode rootList, minNode;
+    private int totalFibNodes; 
 
    /**
     * Return the minimum node, O(1). 
-    * @return, minimum node (FibNode2)
+    * @return, minimum node (FibNode)
     */
-    public FibNode2 peek() {
+    public FibNode peek() {
         return minNode;
     }
     
     /**
      * Extract the minimum node from the Fibonacci Heap and consolidate the new 
      * heap, O(log n).
-     * @return, the minimum node that was removed, (FibNode2). 
+     * @return, the minimum node that was removed, (FibNode). 
      */
-    public FibNode2 dequeue() {
-        FibNode2 temp = minNode;
+    public FibNode dequeue() {
+        FibNode temp = minNode;
         if (temp != null) {
             if (temp.child != null) {
                 // Attach child nodes to the root list
-                List<FibNode2> children = iterate(temp.child);
-                for (FibNode2 child : children) {
-                    mergeWithRootList(child);
+                List<FibNode> children = loop(temp.child);
+                for (FibNode child : children) {
+                    mergeRoot(child);
                     child.parent = null;
                 }
             }
-            removeFromRootList(temp);
+            removeRoot(temp);
             // Set new min node in heap
             if (temp == temp.right) {
                 minNode = rootList = null;
@@ -44,7 +44,7 @@ public class FibHeap {
                 minNode = temp.right;
                 consolidate();
             }
-            totalFibNode2s--;
+            totalFibNodes--;
         }
         return temp;
     }
@@ -53,34 +53,34 @@ public class FibHeap {
      * Insert a node into the the root list of the Fibonacci Heap, O(1). 
      * @param name, Name of new node being inserted, (String). 
      * @param priority, Priority of new node being inserted, (int). 
-     * @return, new node being inserted, (FibNode2). 
+     * @return, new node being inserted, (FibNode). 
      */
-    public FibNode2 insert(String name, int priority) {
-        FibNode2 newNode = new FibNode2(name, priority);
+    public FibNode insert(String name, int priority) {
+        FibNode newNode = new FibNode(name, priority);
         newNode.left = newNode.right = newNode;
-        mergeWithRootList(newNode);
+        mergeRoot(newNode);
         if (minNode == null || newNode.priority < minNode.priority) {
             minNode = newNode;
         }
-        totalFibNode2s++;
+        totalFibNodes++;
         return newNode;
     }
 
     /**
      * Decrease the priority of a specified node in the Fibonacci Heap, O(1). 
-     * @param node, node being modified, (FibNode2).
+     * @param node, node being modified, (FibNode).
      * @param newPriority, new priority of node, (int).
      */
     public void decreasePriority(String name, int newPriority) {
-    	FibNode2 node = this.findNode(name, minNode);
+    	FibNode node = this.findNode(name, minNode);
         if (newPriority > node.priority) {
             return;
         }
         node.priority = newPriority;
-        FibNode2 parent = node.parent;
+        FibNode parent = node.parent;
         if (parent != null && node.priority < parent.priority) {
             cut(node, parent);
-            cascadingCut(parent);
+            cut(parent);
         }
         if (node.priority < minNode.priority) {
             minNode = node;
@@ -88,40 +88,40 @@ public class FibHeap {
     }
 
     /**
-     * Merge the current Fibonacci Heap with another (h2) by joining the 
-     * root lists together. The root list of h2 is appended to the end of 
+     * Merge the current Fibonacci Heap with another (heap) by joining the 
+     * root lists together. The root list of heap is appended to the end of 
      * the current Fibonacci Heap's root list, O(1). 
-     * @param h2, Fibonacci Heap being merged, (FibHeap2). 
-     * @return, new merged Fibonacci Heap, (FibHeap2). 
+     * @param heap, Fibonacci Heap being merged, (FibHeap). 
+     * @return, new merged Fibonacci Heap, (FibHeap). 
      */
-    public FibHeap2 merge(FibHeap2 h2) {
-    	FibHeap2 H = new FibHeap2();
-        H.rootList = rootList;
-        H.minNode = minNode;
+    public FibHeap merge(FibHeap heap) {
+    	FibHeap newHeap = new FibHeap();
+        newHeap.rootList = rootList;
+        newHeap.minNode = minNode;
         // Fix pointers when merging the two heaps
-        FibNode2 last = h2.rootList.left;
-        h2.rootList.left = H.rootList.left;
-        H.rootList.left.right = h2.rootList;
-        H.rootList.left = last;
-        H.rootList.left.right = H.rootList;
+        FibNode last = heap.rootList.left;
+        heap.rootList.left = newHeap.rootList.left;
+        newHeap.rootList.left.right = heap.rootList;
+        newHeap.rootList.left = last;
+        newHeap.rootList.left.right = newHeap.rootList;
         // Update min node if needed
-        if (h2.minNode.priority < H.minNode.priority) {
-            H.minNode = h2.minNode;
+        if (heap.minNode.priority < newHeap.minNode.priority) {
+            newHeap.minNode = heap.minNode;
         }
         // Update total nodes
-        H.totalFibNode2s = totalFibNode2s + h2.totalFibNode2s;
-        return H;
+        newHeap.totalFibNodes = totalFibNodes + heap.totalFibNodes;
+        return newHeap;
     }
 
     /**
-     * Iterate through the root list of the Fibonacci Heap. 
-     * @param head, Head/Root of Fibonacci Heap, (FibNode2).
+     * loop through the root list of the Fibonacci Heap. 
+     * @param head, Head/Root of Fibonacci Heap, (FibNode).
      * @return, List of root list in the Fibonacci Heap, (List<FibNodes2>).
      */
-    private List<FibNode2> iterate(FibNode2 head) {
-        List<FibNode2> nodes = new LinkedList<>();
-        FibNode2 node = head;
-        FibNode2 stop = head;
+    private List<FibNode> loop(FibNode head) {
+        List<FibNode> nodes = new LinkedList<>();
+        FibNode node = head;
+        FibNode stop = head;
         boolean flag = false;
 
         do {
@@ -137,16 +137,16 @@ public class FibHeap {
         return nodes;
     }
     
-    public FibNode2 findNode(String name, FibNode2 start) {
-        List<FibNode2> nodes = iterate(start);
+    public FibNode findNode(String name, FibNode start) {
+        List<FibNode> nodes = loop(start);
         
         for (int i = 0; i < nodes.size(); i++) {
             if (nodes.get(i).name.equals(name)) {
-                FibNode2 foundNode = nodes.get(i);
+                FibNode foundNode = nodes.get(i);
                 return foundNode;
             }
             if (nodes.get(i).child != null) {
-                FibNode2 foundInChild = findNode(name, nodes.get(i).child);
+                FibNode foundInChild = findNode(name, nodes.get(i).child);
                 if (foundInChild != null) {
                     return foundInChild;
                 }
@@ -160,13 +160,13 @@ public class FibHeap {
     /**
      * Cut the child node and merge it with the root list if it is smaller than its
      * parent node to keep the minimums in the root list, O(1). 
-     * @param node1, node being moved to root list, (FibNode2). 
-     * @param node2, node being moved to child list, (FibNode2). 
+     * @param node1, node being moved to root list, (FibNode). 
+     * @param node2, node being moved to child list, (FibNode). 
      */
-    private void cut(FibNode2 node1, FibNode2 node2) {
-        removeFromChildList(node2, node1);
+    private void cut(FibNode node1, FibNode node2) {
+        removeChild(node2, node1);
         node2.degree--;
-        mergeWithRootList(node1);
+        mergeRoot(node1);
         node1.parent = null;
         node1.mark = false;
     }
@@ -176,14 +176,14 @@ public class FibHeap {
      * @param node node to be cut
      * does not return anything, does cutting in place
      */
-    private void cascadingCut(FibNode2 node) {
-        FibNode2 parent = node.parent;
+    private void cut(FibNode node) {
+        FibNode parent = node.parent;
         if (parent != null) {
             if (!node.mark) {
                 node.mark = true;
             } else {
                 cut(node, parent);
-                cascadingCut(parent);
+                cut(parent);
             }
         }
     }
@@ -193,25 +193,25 @@ public class FibHeap {
      * Find new minimum node. 
      */
     private void consolidate() {
-        int maxDegree = (int) Math.floor(Math.log(totalFibNode2s) / Math.log(2)) + 1;
-        FibNode2[] nodeList = new FibNode2[maxDegree];
-        List<FibNode2> nodes = iterate(rootList);
-        for (FibNode2 curNode : nodes) {
+        int maxDegree = (int) Math.floor(Math.log(totalFibNodes) / Math.log(2)) + 1;
+        FibNode[] nodeList = new FibNode[maxDegree];
+        List<FibNode> nodes = loop(rootList);
+        for (FibNode curNode : nodes) {
             int degree = curNode.degree;
             while (nodeList[degree] != null) {
-                FibNode2 tempNode = nodeList[degree];
+                FibNode tempNode = nodeList[degree];
                 if (curNode.priority > tempNode.priority) {
-                    FibNode2 temp = curNode;
+                    FibNode temp = curNode;
                     curNode = tempNode;
                     tempNode = temp;
                 }
-                heapLink(tempNode, curNode);
+                link(tempNode, curNode);
                 nodeList[degree] = null;
                 degree++;
             }
             nodeList[degree] = curNode;
         }
-        for (FibNode2 node : nodeList) {
+        for (FibNode node : nodeList) {
             if (node != null) {
                 if (node.priority < minNode.priority) {
                     minNode = node;
@@ -222,13 +222,13 @@ public class FibHeap {
 
     /**
      * Link a node to the root list and remove from child list. 
-     * @param node1, node being added to root list, (FibNode2). 
-     * @param node2, node being moved to child list, (FibNode2).
+     * @param node1, node being added to root list, (FibNode). 
+     * @param node2, node being moved to child list, (FibNode).
      */
-    private void heapLink(FibNode2 node1, FibNode2 node2) {
-        removeFromRootList(node1);
+    private void link(FibNode node1, FibNode node2) {
+        removeRoot(node1);
         node1.left = node1.right = node1;
-        mergeWithChildList(node2, node1);
+        mergeChild(node2, node1);
         node2.degree++;
         node1.parent = node2;
         node1.mark = false;
@@ -236,9 +236,9 @@ public class FibHeap {
 
     /**
      * Merge node with the root list, O(1).
-     * @param node, node being merged, (FibNode2). 
+     * @param node, node being merged, (FibNode). 
      */
-    private void mergeWithRootList(FibNode2 node) {
+    private void mergeRoot(FibNode node) {
         if (rootList == null) {
             rootList = node;
         } else {
@@ -251,10 +251,10 @@ public class FibHeap {
 
     /**
      * Merge node with a specified child list, O(1). 
-     * @param parent, parent node of child list, (FibNode2).
-     * @param node, node being added, (FibNode2).
+     * @param parent, parent node of child list, (FibNode).
+     * @param node, node being added, (FibNode).
      */
-    private void mergeWithChildList(FibNode2 parent, FibNode2 node) {
+    private void mergeChild(FibNode parent, FibNode node) {
         if (parent.child == null) {
             parent.child = node;
         } else {
@@ -267,9 +267,9 @@ public class FibHeap {
 
     /**
      * Remove a node from the root list, O(1).
-     * @param node, node being removed, (FibNode2).
+     * @param node, node being removed, (FibNode).
      */
-    private void removeFromRootList(FibNode2 node) {
+    private void removeRoot(FibNode node) {
         if (node == rootList) {
             rootList = node.right;
         }
@@ -278,7 +278,7 @@ public class FibHeap {
     }
     
     // Remove a node from the doubly linked child list
-    private void removeFromChildList(FibNode2 parent, FibNode2 node) {
+    private void removeChild(FibNode parent, FibNode node) {
         if (parent.child == parent.child.right) {
             parent.child = null;
         } else if (parent.child == node) {
