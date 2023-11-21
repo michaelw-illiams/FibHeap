@@ -5,7 +5,7 @@ public class FibNode2 {
     int degree;
     boolean mark;
 
-    public FibNode2(int priority, String name) {
+    public FibNode2(String name, int priority) {
         this.priority = priority;
         this.name = name;
         this.parent = this.child = this.left = this.right = null;

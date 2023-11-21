@@ -1,17 +1,33 @@
 public class main {
-
     public static void main(String[] args) {
-        FibHeap2 fibHeap = new FibHeap2();
-        fibHeap.insert(new FibNode2("A", 10));
-        fibHeap.insert(new FibNode2("B", 5));
-        fibHeap.insert(new FibNode2("C", 7));
-        fibHeap.insert(new FibNode2("hey", 3));
-        fibHeap.insert(new FibNode2("h", 80));
-        fibHeap.insert(new FibNode2("i", 2));
-        fibHeap.insert(new FibNode2("Cj", 1));
-        FibNode2 removal = fibHeap.findNode("Cj");
-        System.out.println(removal.name);
-        fibHeap.removeNode(removal);
-        System.out.println(fibHeap.getMin().name);
+        HospitalQueue q = new HospitalQueue();
+        q.addPatient("Tim", 2);
+        q.addPatient("Jim", 6);
+        q.addPatient("Kim", 3);
+        // should print tim
+        System.out.println(q.firstPatient());
+        q.addPatient("Al", 5);
+        q.addPatient("Allen", 7);
+        q.addPatient("Timmy", 3);
+        q.addPatient("Tommy", 1);
+        q.addPatient("Hilfiger", 10);
+
+        //should print Tommy, Tim, Timmy, Kim, Al, Jim, Allen, Hilfiger
+        FibNode2 patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
+        patient = q.dequeue();
+        System.out.println(patient.name + ": " + patient.priority);
     }
 }
