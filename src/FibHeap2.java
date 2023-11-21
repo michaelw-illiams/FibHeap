@@ -9,11 +9,10 @@ public class FibHeap2 {
     // Maintain total node count in full Fibonacci heap
     private int totalFibNode2s; 
 
-    // Return min node in O(1) time
+// Return min node in O(1) time
     public FibNode2 peek() {
         return minNode;
     }
-
     // Extract (delete) the min node from the heap in O(log n) time
     public FibNode2 dequeue() {
         FibNode2 tempNode = minNode;

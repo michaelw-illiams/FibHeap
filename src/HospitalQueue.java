@@ -3,6 +3,7 @@ public class HospitalQueue {
     private FibHeap2 fibHeap;
     private int numPatients = 0;
 
+
     /**
      * Constructor
      */
@@ -57,7 +58,7 @@ public class HospitalQueue {
     public FibNode2 peek() {
         return fibHeap.peek();
     }
-
+  
     /**
      * Checks if the number of patients is 0
      */
