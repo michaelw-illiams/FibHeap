@@ -29,7 +29,6 @@ public class FibHeap {
         FibNode temp = minNode;
         if (temp != null) {
             if (temp.child != null) {
-                // Attach child nodes to the root list
                 List<FibNode> children = loop(temp.child);
                 for (FibNode child : children) {
                     mergeRoot(child);
@@ -37,7 +36,6 @@ public class FibHeap {
                 }
             }
             removeRoot(temp);
-            // Set new min node in heap
             if (temp == temp.right) {
                 minNode = rootList = null;
             } else {
@@ -98,17 +96,14 @@ public class FibHeap {
     	FibHeap newHeap = new FibHeap();
         newHeap.rootList = rootList;
         newHeap.minNode = minNode;
-        // Fix pointers when merging the two heaps
         FibNode last = heap.rootList.left;
         heap.rootList.left = newHeap.rootList.left;
         newHeap.rootList.left.right = heap.rootList;
         newHeap.rootList.left = last;
         newHeap.rootList.left.right = newHeap.rootList;
-        // Update min node if needed
         if (heap.minNode.priority < newHeap.minNode.priority) {
             newHeap.minNode = heap.minNode;
         }
-        // Update total nodes
         newHeap.totalFibNodes = totalFibNodes + heap.totalFibNodes;
         return newHeap;
     }
