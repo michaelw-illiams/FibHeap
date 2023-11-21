@@ -22,15 +22,25 @@ public class HospitalQueue {
     /**
      * Changes the priority of the patient
      */
-    public void decreasePriority(FibNode2 patient, int newPriority) {
-        fibHeap.decreasepriority(patient, newPriority);;
+    public void decreasePriority(String name, int newPriority) {
+        fibHeap.decreasePriority(name, newPriority);
+    }
+    
+    /**
+     * returns the priority of the patient of a given name
+     */
+    public int findPriority(String name) {
+    	return fibHeap.findNode(name, fibHeap.peek()).priority;
     }
 
     /**
      * Shows the first patient in the queue's name
      */
     public String firstPatient() {
-        return fibHeap.peek().name;
+    	if(fibHeap.peek() != null) {
+    		return fibHeap.peek().name;
+    	}
+    	return null;
     }
 
     /**
@@ -51,12 +61,24 @@ public class HospitalQueue {
         }
         return null;
     }
+    
+    /**
+     * Merge two HosptialQueues
+     */
+    public void merge(HospitalQueue toMerge) {
+    	FibHeap2 fh = this.getFibHeap();
+    	this.fibHeap = fh.merge(toMerge.getFibHeap());
+    	numPatients = numPatients + toMerge.numPatients;
+    }
 
     /**
      * Returns but does not remove the first patient in the queue
      */
     public FibNode2 peek() {
-        return fibHeap.peek();
+    	if(fibHeap.peek() != null) {
+    		return fibHeap.peek();
+    	}
+    	return null;
     }
 
     /**
@@ -80,4 +102,9 @@ public class HospitalQueue {
     public int numPatients() {
         return numPatients;
     }
+    
+    public FibHeap2 getFibHeap() {
+    	return this.fibHeap;
+    }
+    
 }
