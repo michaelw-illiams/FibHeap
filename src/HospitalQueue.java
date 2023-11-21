@@ -14,9 +14,9 @@ public class HospitalQueue {
     /**
      * Adds a new patient to the queue
      */
-    public void addPatient(String name, int priority) {
+    public FibNode2 addPatient(String name, int priority) {
         numPatients++;
-        fibHeap.insert(name, priority);
+        return fibHeap.insert(name, priority);
     }
 
     /**
@@ -56,8 +56,8 @@ public class HospitalQueue {
      */
     public FibNode2 dequeue() {
         if (!this.isEmpty()) {
-           numPatients--; 
-           return fibHeap.dequeue();
+            numPatients--;
+            return fibHeap.dequeue();
         }
         return null;
     }
@@ -80,7 +80,7 @@ public class HospitalQueue {
     	}
     	return null;
     }
-  
+
     /**
      * Checks if the number of patients is 0
      */
