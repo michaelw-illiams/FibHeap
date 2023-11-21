@@ -1,18 +1,15 @@
-
 public class FibNode2 {
-    String name;
     int priority;
+    String name; // name of the patient
+    FibNode2 parent, child, left, right;
     int degree;
-    FibNode2 parent;
-    FibNode2 child;
-    FibNode2 next;
-    FibNode2 prev;
-    boolean marked;
+    boolean mark;
 
     public FibNode2(String name, int priority) {
-        this.name = name;
         this.priority = priority;
-        this.next = this;
-        this.prev = this;
+        this.name = name;
+        this.parent = this.child = this.left = this.right = null;
+        this.degree = 0;
+        this.mark = false;
     }
 }
