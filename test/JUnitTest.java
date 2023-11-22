@@ -173,7 +173,7 @@ class JUnitTest {
 		hq.dequeue();
 		
 		for(int i = 0; i < hq.numPatients(); i++) {
-			FibNode2 node = hq.peek();
+			FibNode node = hq.peek();
 			hq.decreasePriority(node.name, 1000);
 			hq.decreasePriority(node.name, 40);
 			hq.decreasePriority(node.name, 20);
