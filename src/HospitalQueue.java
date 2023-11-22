@@ -1,3 +1,9 @@
+/**
+ * File: FibHeap.java
+ * @author Michael Williams, Carson Nannini
+ * Purpose: Utilizes the heap structure to provide a hospital/priority queue with real-world-esque interfacing
+ */
+
 public class HospitalQueue {
 
     private FibHeap fibHeap;
