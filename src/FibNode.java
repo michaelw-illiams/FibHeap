@@ -1,3 +1,8 @@
+/**
+ * File: FibHeap.java
+ * @author Michael Williams, Carson Nannini
+ * Purpose: A custom node structure providing the needed attributes for a heap
+ */
 public class FibNode {
     int priority;
     String name;
