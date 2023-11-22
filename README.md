@@ -1,4 +1,6 @@
 # CS345 Fibonacci Heap Project 
+### This code works by implementing a queue using a Fibonacci Heap as it's internal implementation.  
+### It is run with the main function and unit tests. 
 ## To Run
 To run this code, clone it using the git clone feature. Then the unit tests can be ran from the test directory. If run with coverage, they will show the lines that are covered by the tests. To run the main function, go to the src directory and simply run main. It will print out the the patients in the order of the deque. Additionally it will print the root list representationm of the root nodes, this is used for comparing to the hand drawn heaps.
 
