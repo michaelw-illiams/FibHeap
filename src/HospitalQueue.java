@@ -9,7 +9,6 @@ public class HospitalQueue {
     private FibHeap fibHeap;
     private int numPatients = 0;
 
-
     /**
      * Constructor
      */

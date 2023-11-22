@@ -6,7 +6,7 @@
 public class FibNode {
     int priority;
     String name;
-    FibNode2 parent, child, left, right;
+    FibNode parent, child, left, right;
     int degree;
     boolean mark;
 

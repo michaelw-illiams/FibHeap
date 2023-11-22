@@ -5,7 +5,7 @@
  * Heap by printing the root list and nodes removed on our Fibonacci Heap. 
  *
  */
-public class main {
+public class Main {
     public static void main(String[] args) {
     	// insert
         HospitalQueue q = new HospitalQueue();
