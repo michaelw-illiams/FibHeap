@@ -1,5 +1,4 @@
-public class Main{
-
+public class Main {
     public static void main(String[] args) {
         System.out.println("Running Test Case 1: Basic Functionality");
         Test1.testCaseBasicFunctionality();
@@ -23,6 +22,14 @@ public class Main{
 
         System.out.println("Running Test Case 6: Should print patients in order of priority");
         Test1.testCase6();
+        System.out.println();
+
+        System.out.println("Running Test Case 7: Consolidation And Removal");
+        Test1.testCaseConsolidationAndRemoval();
+        System.out.println();
+
+        System.out.println("Running Test Case 8: Consolidation more than 2 levels");
+        Test1.testCaseAdvancedConsolidation();
         System.out.println();
     }
 }
