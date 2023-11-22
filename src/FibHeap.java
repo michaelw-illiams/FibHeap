@@ -272,7 +272,11 @@ public class FibHeap {
         node.right.left = node.left;
     }
     
-    // Remove a node from the doubly linked child list
+    /**
+     * Remove child node from a specified parent
+     * @param parent, parent of child (FibNode)
+     * @param node, node being removed, (FibNode)
+     */
     private void removeChild(FibNode parent, FibNode node) {
         if (parent.child == parent.child.right) {
             parent.child = null;
@@ -282,5 +286,22 @@ public class FibHeap {
         }
         node.left.right = node.right;
         node.right.left = node.left;
+    }
+
+    /**
+     * Turn root list into string (for testing).
+     */
+    public String toString() {
+    	String retval = "Root List: [";
+    	List<FibNode> roots = loop(minNode);
+    	for(int i = 0; i < roots.size(); i++) {
+    		if(i != roots.size() - 1) {
+    			retval += roots.get(i).priority + ", ";
+    		}
+    		else {
+    			retval += roots.get(i).priority + "]";
+    		}
+    	}
+    	return retval;	
     }
 }
