@@ -18,7 +18,10 @@ class JUnitTest {
 			"Drake", "Leonardo DiCaprio"};
 	private static int[] testTwoVals = {20, 10, 50, 13, 103, 4, 8, 86, 61, 410, 666, 300, 9, 55, 72, 1002, 
 			887, 634, 104, 523, 98, 100, 63, 96, 8, 220, 999, 3001, 891, 693, 465, 24, 83, 10000, 2021, 919};
-	
+
+	/**
+	* Tests the ability to add consecutive values to the queue and also checks if the order is properly maintained
+	*/
 	@Test
 	void testAdd() {
 		// One add
@@ -36,7 +39,10 @@ class JUnitTest {
 		assertEquals("Chris Rock", hq.firstPatient());
 		assertEquals(0, hq.firstPriority());
 	}
-	
+
+	/**
+	* Tests the ability to empty the queue
+	*/
 	@Test
 	void testEmpty() {
 		assertEquals(3, hq.numPatients());
@@ -44,7 +50,10 @@ class JUnitTest {
 		assertEquals(0, hq.numPatients());
 		assertEquals(null, hq.firstPatient());
 	}
-	
+
+	/**
+	* Tests the ability to get the number of patients
+	*/
 	@Test
 	void testNumPatients() {
 		// Get size of queue with 100 patients
@@ -57,12 +66,16 @@ class JUnitTest {
 		hq.emptyQueue();
 		assertEquals(0, hq.numPatients());
 	}
-	
+
+	/**
+	* Tests the ability to dequeue consecutive values to the queue and also checks if the order is properly maintained
+	*/
 	@Test
 	void testDequeue() {
 		// Test One
 		testOne();
 		assertEquals(11, hq.numPatients());
+		// checks that dequeued values update properly
 		for(int i = 0; i < 10; i++) {
 			int j = i + 1;
 			assertEquals(testOne[i], hq.dequeue().name);
@@ -76,7 +89,9 @@ class JUnitTest {
 		// Test Two
 		assertEquals(0, hq.numPatients());
 		testTwo();
+		// insertion sort to initialize the test case, also parses strings
 		for (int i = 1; i < testTwoVals.length; ++i) {
+			
             int keyVal = testTwoVals[i];
             String keyName = testTwo[i];
             int j = i - 1;
@@ -97,10 +112,12 @@ class JUnitTest {
 		assertEquals(null, hq.peek());
 		hq.emptyQueue();
 		hq.dequeue();
-		assertEquals(null, hq.peek());
-		
+		assertEquals(null, hq.peek());	
 	}
-	
+
+	/**
+	* Tests the ability to merge to lists together
+	*/ 
 	@Test
 	void testMerge() {
 		// Merge two small Hospital Queues
@@ -125,9 +142,11 @@ class JUnitTest {
 		assertEquals(41, hq.numPatients());
 		assertEquals("Jennifer Anieston", hq.firstPatient());
 		hq.emptyQueue();
-		
 	}
-	
+
+	/**
+	* Tests the ability to decrease the priority of a node given a name
+	*/ 
 	@Test
 	void testDecreasePriority() {
 		hq.emptyQueue();
@@ -157,20 +176,26 @@ class JUnitTest {
 			hq.dequeue();
 		}
 	}
-	
+	/**
+	* Tests the ability to check for empty q
+	*/ 
 	@Test
 	void testIsEmpty() {
 		hq.emptyQueue();
 		assertEquals(true, hq.isEmpty());
 	}
 	
-	
+	/**
+	* Constructor for list of names
+	*/ 
 	void testOne() {
 		for(int i = 0; i < testOne.length; i++) {
 			hq.addPatient(testOne[i], i + 1);
 		}
 	}
-	
+	/**
+	* Constructor for list of names
+	*/  
 	void testTwo() {
 		for(int i = 0; i < testTwo.length; i++) {
 			hq.addPatient(testTwo[i], testTwoVals[i]);
