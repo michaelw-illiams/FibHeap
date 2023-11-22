@@ -109,8 +109,18 @@ public class HospitalQueue {
         return numPatients;
     }
     
+    /**
+     * Return FibHeap
+     */
     public FibHeap getFibHeap() {
     	return this.fibHeap;
+    }
+    
+    /**
+     * Return String of root nodes of FibHeap
+     */
+    public String toString() {
+    	return this.fibHeap.toString();
     }
     
 }
