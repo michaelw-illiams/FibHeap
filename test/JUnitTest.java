@@ -2,6 +2,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+/**
+ * File: FibHeap.java
+ * @author Carson Nannini, Michael Williams
+ * Purpose: Tests the hospital queue and compares against expected/hardcoded functionality.
+ */
 class JUnitTest {
 	
 	private static HospitalQueue hq = new HospitalQueue();
